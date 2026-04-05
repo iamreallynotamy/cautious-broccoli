@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -315,8 +315,8 @@ main { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem; }
 
 <header>
   <div class="lang-toggle">
-    <button class="active" onclick="setLang('en')">EN</button>
-    <button onclick="setLang('zh')">中文</button>
+    <button onclick="setLang('en')">EN</button>
+    <button class="active" onclick="setLang('zh')">中文</button>
   </div>
   <h1 data-t="title">Ireland Family Trip</h1>
   <p data-t="subtitle">6 – 13 April 2026</p>
@@ -377,7 +377,7 @@ const translations = {
     fri: '周五', sat: '周六', sun: '周日',
   }
 };
-let currentLang = 'en';
+let currentLang = 'zh';
 function t(key) { return (translations[currentLang] && translations[currentLang][key]) || translations.en[key] || key; }
 function setLang(lang) {
   currentLang = lang;
