@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ireland Family Trip — April 2026</title>
+<style>
+:root {
+  --green: #1a7a4c;
+  --green-light: #e8f5ee;
+  --green-dark: #0d5c36;
+  --amber: #e6960a;
+  --amber-light: #fff3e0;
+  --red: #d32f2f;
+  --red-light: #ffeaea;
+  --blue: #1976d2;
+  --gray-50: #f8f9fa;
+  --gray-100: #f1f3f5;
+  --gray-200: #e9ecef;
+  --gray-400: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-800: #343a40;
+  --radius: 12px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-lg: 0 4px 20px rgba(0,0,0,0.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--gray-100);
+  color: var(--gray-800);
+  line-height: 1.6;
+}
+header {
+  background: linear-gradient(135deg, var(--green-dark), var(--green));
+  color: white;
+  padding: 2rem 1.5rem 1rem;
+  text-align: center;
+  position: relative;
+}
+header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.25rem; }
+header p { opacity: 0.9; font-size: 1rem; }
+.lang-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  display: flex;
+  gap: 0;
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.lang-toggle button {
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.lang-toggle button.active {
+  background: rgba(255,255,255,0.25);
+  color: white;
+}
+.day-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+  display: flex;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--gray-200);
+  box-shadow: var(--shadow);
+  scrollbar-width: none;
+}
+.day-nav::-webkit-scrollbar { display: none; }
+.day-nav button {
+  flex-shrink: 0;
+  padding: 12px 20px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--gray-600);
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.day-nav button:hover { color: var(--green); background: var(--green-light); }
+.day-nav button.active { color: var(--green); border-bottom-color: var(--green); font-weight: 600; }
+main { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem; }
+.day-section { display: none; }
+.day-section.active { display: block; }
+
+.day-header {
+  background: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 1rem;
+}
+.day-header h2 { font-size: 1.3rem; color: var(--green-dark); margin-bottom: 0.25rem; }
+.day-header .subtitle { color: var(--gray-600); font-size: 0.9rem; }
+.traveler-badge {
+  display: inline-block;
+  background: var(--green-light);
+  color: var(--green);
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+.rain-warning {
+  margin-top: 0.75rem;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: none;
+}
+.rain-warning.amber { background: var(--amber-light); color: var(--amber); display: flex; align-items: center; gap: 6px; }
+.rain-warning.red { background: var(--red-light); color: var(--red); display: flex; align-items: center; gap: 6px; }
+
+.card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 1rem;
+}
+.card h3 { font-size: 1rem; margin-bottom: 0.75rem; color: var(--gray-800); }
+
+/* Timeline */
+.timeline { }
+.segment {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--gray-100);
+}
+.segment:last-child { padding-bottom: 0; margin-bottom: 0; border-bottom: none; }
+.segment .time-col {
+  flex-shrink: 0;
+  width: 46px;
+  text-align: right;
+  line-height: 1.35;
+  padding-top: 3px;
+}
+.segment .time-col .time-start { font-size: 0.82rem; font-weight: 700; color: var(--gray-800); }
+.segment .time-col .time-end { font-size: 0.75rem; font-weight: 400; color: var(--gray-400); }
+.segment .dot {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+.segment.flight .dot { background: #e3f2fd; }
+.segment.drive .dot { background: var(--green-light); }
+.segment.train .dot { background: #fff3e0; }
+.segment.activity .dot { background: var(--gray-100); }
+.segment .info { flex: 1; min-width: 0; }
+.segment .info h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.segment .info p { font-size: 0.82rem; color: var(--gray-600); }
+.segment .duration {
+  display: inline-block;
+  background: var(--gray-100);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gray-600);
+  margin-top: 2px;
+}
+.segment .info .split-label {
+  display: inline-block;
+  background: #fff3e0;
+  color: var(--amber);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.weather-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+.weather-inline.wi-clear { background: #e8f5e9; color: #388e3c; }
+.weather-inline.wi-rainy { background: var(--amber-light); color: #e65100; }
+.weather-inline.wi-heavy { background: var(--red-light); color: var(--red); }
+
+/* Hotel card */
+.hotel-card { border-left: 4px solid var(--green); }
+.hotel-card .hotel-name { font-weight: 700; color: var(--green-dark); }
+.hotel-card .hotel-detail { font-size: 0.82rem; color: var(--gray-600); margin-top: 4px; }
+
+/* Activities */
+.activities ul { list-style: none; }
+.activities li {
+  padding: 6px 0;
+  padding-left: 1.5rem;
+  position: relative;
+  font-size: 0.9rem;
+}
+.activities li::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+
+/* Documents */
+.doc-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.doc-tag {
+  background: var(--gray-100);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  color: var(--gray-600);
+}
+
+/* Weather */
+.weather-loading { text-align: center; color: var(--gray-400); padding: 2rem; font-size: 0.9rem; }
+.weather-grid {
+  display: flex;
+  overflow-x: auto;
+  gap: 0;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+.weather-hour {
+  flex-shrink: 0;
+  width: 52px;
+  text-align: center;
+  padding: 6px 2px;
+  border-right: 1px solid var(--gray-100);
+  position: relative;
+}
+.weather-hour:last-child { border-right: none; }
+.weather-hour .wh-time { font-size: 0.7rem; color: var(--gray-600); font-weight: 600; }
+.weather-hour .wh-icon { font-size: 1.1rem; margin: 4px 0; }
+.weather-hour .wh-temp { font-size: 0.75rem; font-weight: 600; }
+.weather-hour .wh-rain-bar {
+  height: 30px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: 4px;
+}
+.weather-hour .wh-rain-bar .bar {
+  width: 16px;
+  border-radius: 3px 3px 0 0;
+  min-height: 2px;
+  transition: height 0.3s;
+}
+.weather-hour .wh-rain-pct { font-size: 0.65rem; color: var(--gray-400); margin-top: 2px; }
+.weather-hour.rain-amber { background: rgba(230,150,10,0.06); }
+.weather-hour.rain-red { background: rgba(211,47,47,0.08); }
+.weather-summary-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+}
+.weather-summary-row .ws-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--gray-600);
+}
+.weather-summary-row .ws-item strong { color: var(--gray-800); }
+
+/* Group split */
+.group-block {
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+.group-block h4 {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  color: var(--green-dark);
+}
+
+@media (max-width: 600px) {
+  header h1 { font-size: 1.4rem; }
+  .day-nav button { padding: 10px 14px; font-size: 0.8rem; }
+  main { padding: 1rem 0.5rem; }
+  .card { padding: 1rem; }
+  .weather-hour { width: 46px; }
+  .lang-toggle { top: 0.5rem; right: 0.5rem; }
+  .lang-toggle button { padding: 4px 10px; font-size: 0.75rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="lang-toggle">
+    <button class="active" onclick="setLang('en')">EN</button>
+    <button onclick="setLang('zh')">中文</button>
+  </div>
+  <h1 data-t="title">Ireland Family Trip</h1>
+  <p data-t="subtitle">6 – 13 April 2026</p>
+</header>
+
+<nav class="day-nav" id="dayNav"></nav>
+<main id="main"></main>
+
+<script>
+// ── i18n ──
+const translations = {
+  en: {
+    title: 'Ireland Family Trip',
+    subtitle: '6 – 13 April 2026',
+    travelers_all: 'All 6 travellers',
+    travelers_5: '5 travellers (family)',
+    travelers_sijia: 'S only',
+    weather: 'Weather Forecast',
+    hotel: 'Hotel',
+    documents: 'Booking Documents',
+    activities: 'Activities',
+    itinerary: 'Itinerary',
+    checkin: 'Check-in',
+    checkout: 'Check-out',
+    rooms: 'rooms',
+    rain_likely: 'Rain likely — bring waterproofs!',
+    rain_possible: 'Some rain possible — pack a layer',
+    loading_weather: 'Loading weather forecast...',
+    weather_unavailable: 'Weather forecast not yet available for this date',
+    group_sijia: 'S',
+    group_family: 'Rest of family',
+    no_pdf: 'No PDF on file',
+    mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday',
+    fri: 'Friday', sat: 'Saturday', sun: 'Sunday',
+  },
+  zh: {
+    title: '爱尔兰家庭之旅',
+    subtitle: '2026年4月6日 – 13日',
+    travelers_all: '全部6位旅客',
+    travelers_5: '5位旅客（家人）',
+    travelers_sijia: '仅S',
+    weather: '天气预报',
+    hotel: '酒店',
+    documents: '预订文件',
+    activities: '活动安排',
+    itinerary: '行程',
+    checkin: '入住',
+    checkout: '退房',
+    rooms: '间房',
+    rain_likely: '很可能下雨 — 请带好雨具！',
+    rain_possible: '可能有雨 — 建议多带一件外套',
+    loading_weather: '正在加载天气预报...',
+    weather_unavailable: '该日期天气预报暂不可用',
+    group_sijia: 'S',
+    group_family: 'Rest of family',
+    no_pdf: '暂无PDF文件',
+    mon: '周一', tue: '周二', wed: '周三', thu: '周四',
+    fri: '周五', sat: '周六', sun: '周日',
+  }
+};
+let currentLang = 'en';
+function t(key) { return (translations[currentLang] && translations[currentLang][key]) || translations.en[key] || key; }
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b.textContent.trim() === (lang === 'en' ? 'EN' : '中文')));
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  render();
+}
+
+// ── Trip data ──
+const days = [
+  {
+    date: '2026-04-06', weekday: 'mon',
+    title: { en: 'London to Belfast', zh: '伦敦 → 贝尔法斯特' },
+    location: { en: 'Belfast', zh: '贝尔法斯特' },
+    travelers: 'travelers_all',
+    weatherKey: 'belfast',
+    segments: [
+      { type: 'flight', icon: '✈️', title: { en: 'BA1400: London Heathrow → Belfast City', zh: 'BA1400: 伦敦希思罗 → 贝尔法斯特城市机场' }, time: '13:10 – 14:35', duration: '1h 25m' },
+      { type: 'drive', icon: '🚗', title: { en: 'Collect hire car (Alamo, Ford Galaxy 7-seat)', zh: '取租车（Alamo，福特Galaxy 7座）' }, time: '~15:30', duration: '' },
+      { type: 'drive', icon: '🚗', title: { en: 'Airport → voco Belfast', zh: '机场 → voco 贝尔法斯特' }, time: '~15:45', duration: '10 min' },
+      { type: 'activity', icon: '🏨', title: { en: 'Check in at voco Belfast', zh: '入住 voco 贝尔法斯特' }, time: '~16:00', duration: '' },
+      { type: 'activity', icon: '🌿', title: { en: 'Botanic Gardens & Palm House — light walk (free)', zh: '植物园 & 棕榈屋 — 轻松散步（免费）' }, time: '~16:30 – 17:00', duration: '~30 min · right next to hotel', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Botanic+Gardens+Belfast' },
+      { type: 'activity', icon: '🎓', title: { en: 'Queen\'s University — quick look at the Lanyon Building (free)', zh: '女王大学 — 快速参观Lanyon大楼（免费）' }, time: '~17:00 – 17:20', duration: '~20 min · 2 min walk from gardens', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Queen%27s+University+Belfast' },
+      { type: 'activity', icon: '🍽️', title: { en: 'Dinner at Home Restaurant Belfast (22 Wellington Pl, BT1 6GE)', zh: '晚餐：Home Restaurant Belfast（22 Wellington Pl, BT1 6GE）' }, time: '~19:00', duration: '10-15 min walk from hotel', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Home+Restaurant+22+Wellington+Place+Belfast' },
+    ],
+    activities: {
+      en: ['Easter Monday — prioritise free attractions', 'Botanic Gardens is free and right next to the hotel', 'Skip Titanic Museum (paid, ~£100 for group, needs 2h+)', 'Easy dinner, early night'],
+      zh: ['复活节周一 — 优先免费景点', '植物园免费且紧邻酒店', '跳过泰坦尼克博物馆（收费，全组~£100，需2小时+）', '简单晚餐，早点休息']
+    },
+    hotel: { name: 'voco Belfast by IHG', addr: 'The Gasworks, Belfast, BT7 2JB', rooms: 2, checkin: '15:00', checkout: '11:00', mapUrl: 'https://www.google.com/maps/search/?api=1&query=voco+Belfast+by+IHG+The+Gasworks' },
+    pdfs: ['20260406 - travel - BA1400.pdf', '20260406-09 - travel - Alamo car hire Belfast.pdf', '20260406 - travel - EnjoyTravel car hire confirmation.pdf', '20260406 - travel - DVLA licence summary.pdf', '20260406-07 - hotel - voco Belfast.pdf'],
+  },
+  {
+    date: '2026-04-07', weekday: 'tue',
+    title: { en: 'Belfast → Derry (direct)', zh: '贝尔法斯特 → 德里（直达）' },
+    location: { en: 'Derry', zh: '德里' },
+    travelers: 'travelers_all',
+    weatherKey: 'derry',
+    segments: [
+      { type: 'activity', icon: '🥐', title: { en: 'Breakfast at voco Belfast (not included, £13.95 buffet)', zh: '早餐：voco Belfast（不含早，自助餐£13.95）' }, time: '~08:30 – 09:00', duration: '' },
+      { type: 'drive', icon: '🚗', title: { en: 'Belfast → Derry (via A6 motorway)', zh: '贝尔法斯特 → 德里（A6高速）' }, time: '~09:30 – 11:15', duration: '1h 45m · 115 km' },
+      { type: 'activity', icon: '🏨', title: { en: 'Check in at Holiday Inn Express Derry', zh: '入住德里Holiday Inn Express' }, time: '~11:30', duration: '' },
+      { type: 'activity', icon: '🏰', title: { en: 'Derry Walled City walk', zh: '德里城墙古城漫步' }, time: '~12:00 – 14:00', duration: '~2h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Derry+City+Walls' },
+      { type: 'activity', icon: '🍽️', title: { en: 'Lunch at Spaghetti Junction (casual Italian, kid-friendly)', zh: '午餐：Spaghetti Junction（意式休闲，适合孩子）' }, time: '~13:00 – 14:00', duration: 'near walled city', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Spaghetti+Junction+Derry' },
+      { type: 'activity', icon: '🚶', title: { en: 'Explore old streets and views', zh: '探索古老街道和风景' }, time: '~14:00 – 15:30', duration: 'relaxed pace' },
+      { type: 'activity', icon: '☕', title: { en: 'Coffee & cake at Legenderry Warehouse No. 1', zh: '咖啡甜点：Legenderry Warehouse No. 1' }, time: '~15:30 – 16:15', duration: 'spacious, family-friendly café', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Legenderry+Warehouse+No+1+Derry' },
+      { type: 'activity', icon: '🍽️', title: { en: 'Dinner at The Exchange (Exchange House, Queens Quay, BT48 7AY)', zh: '晚餐：The Exchange（Exchange House, Queens Quay, BT48 7AY）' }, time: '~18:00', duration: '~10 min walk from hotel', mapUrl: 'https://www.google.com/maps/search/?api=1&query=The+Exchange+Restaurant+Queens+Quay+Londonderry' },
+    ],
+    activities: {
+      en: ['Relaxed day — bad weather forecast for north coast', 'Drive direct to Derry, explore the walled city at easy pace', 'Scenic coast day moved to Wednesday'],
+      zh: ['轻松一日 — 北海岸天气预报不好', '直接开车到德里，轻松游览城墙古城', '北海岸观光日改到周三']
+    },
+    hotel: { name: 'Holiday Inn Express Derry-Londonderry', addr: '31 Strand Road, Derry BT48 7BL', rooms: 2, checkin: '15:00', checkout: '11:00', note: { en: '1 night only · Secure parking: Quayside Multi-Storey Car Park', zh: '仅住1晚 · 停车：Quayside多层停车场' }, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Holiday+Inn+Express+Derry+Londonderry+31+Strand+Road' },
+    pdfs: ['20260407-08 - hotel - IHG Derry.pdf'],
+  },
+  {
+    date: '2026-04-08', weekday: 'wed',
+    title: { en: 'North Coast Scenic Drive → Belfast', zh: '北海岸观光 → 贝尔法斯特' },
+    location: { en: 'North Coast → Belfast', zh: '北海岸 → 贝尔法斯特' },
+    travelers: 'travelers_all',
+    weatherKey: 'belfast',
+    segments: [
+      { type: 'activity', icon: '🥐', title: { en: 'Breakfast at Holiday Inn Express (usually included)', zh: '早餐：Holiday Inn Express（通常含早）' }, time: '~08:00 – 08:30', duration: '' },
+      { type: 'drive', icon: '🚗', title: { en: 'Derry → Giant\'s Causeway', zh: '德里 → 巨人堤道' }, time: '~09:00 – 10:00', duration: '1h · 55 km' },
+      { type: 'activity', icon: '🪨', title: { en: 'Giant\'s Causeway', zh: '巨人堤道' }, time: '~10:00 – 11:30', duration: '~1.5h visit', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Giant%27s+Causeway' },
+      { type: 'drive', icon: '🚗', title: { en: 'Giant\'s Causeway → Carrick-a-Rede', zh: '巨人堤道 → 卡里克空中索桥' }, time: '~11:30 – 11:50', duration: '20 min · 15 km' },
+      { type: 'activity', icon: '🌉', title: { en: 'Carrick-a-Rede Rope Bridge', zh: '卡里克空中索桥' }, time: '~11:50 – 12:50', duration: '~1h visit', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Carrick-a-Rede+Rope+Bridge' },
+      { type: 'activity', icon: '🍽️', title: { en: 'Lunch at Thyme & Co Café, Ballycastle (local ingredients, family-run)', zh: '午餐：Thyme & Co Café, Ballycastle（本地食材，家庭经营）' }, time: '~12:50 – 13:20', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Thyme+and+Co+Cafe+Ballycastle' },
+      { type: 'activity', icon: '☕', title: { en: 'Ursa Minor Bakehouse — renowned sourdough & pastries', zh: 'Ursa Minor面包房 — 知名酸面包和糕点' }, time: '~13:20 – 13:30', duration: 'quick takeaway', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Ursa+Minor+Bakehouse+Ballycastle' },
+      { type: 'drive', icon: '🚗', title: { en: 'Ballycastle → Dark Hedges', zh: 'Ballycastle → 黑暗树篱' }, time: '~13:30 – 13:45', duration: '15 min · 10 km' },
+      { type: 'activity', icon: '🌳', title: { en: 'Dark Hedges (Game of Thrones)', zh: '黑暗树篱（权力的游戏取景地）' }, time: '~13:45 – 14:15', duration: '~30 min', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Dark+Hedges+Northern+Ireland' },
+      { type: 'drive', icon: '🚗', title: { en: 'Dark Hedges → Belfast', zh: '黑暗树篱 → 贝尔法斯特' }, time: '~14:15 – 15:30', duration: '1h 15m · 80 km' },
+      { type: 'drive', icon: '🅿️', title: { en: 'Park at Great Northern Carpark (Hope St, BT12 5EE) — £12/24h, 2 min walk to hotel', zh: '停车：Great Northern停车场（Hope St, BT12 5EE）— £12/24小时，步行2分钟到酒店' }, time: '~15:30', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Great+Northern+Car+Park+Hope+Street+Belfast' },
+      { type: 'activity', icon: '🏨', title: { en: 'Check in at Leonardo Hotel Belfast', zh: '入住Leonardo酒店' }, time: '~15:45', duration: '' },
+      { type: 'activity', icon: '🏛️', title: { en: 'Belfast City Hall (grounds & tour, free)', zh: '贝尔法斯特市政厅（庭院参观，免费）' }, time: '~16:00 – 16:45', duration: '~45 min · 5 min walk from hotel', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Belfast+City+Hall' },
+    ],
+    activities: {
+      en: ['Main scenic day — North Antrim coast', 'Scenic route from Derry ending in Belfast', 'City Hall visit — free, right next to hotel'],
+      zh: ['主要观光日 — 北安特里姆海岸', '从德里出发沿海岸线到贝尔法斯特', '市政厅参观 — 免费，酒店旁边']
+    },
+    hotel: { name: 'Leonardo Hotel Belfast', addr: 'Great Victoria Street, Belfast, BT1 6DY', rooms: 2, checkin: '15:00', checkout: '11:00', note: { en: 'No on-site parking — use Great Northern Carpark (Hope Street, BT12 5EE), £12/24h, 2 min walk. Bring ticket to reception at checkout for discount.', zh: '无酒店停车位 — 使用Great Northern停车场（Hope Street, BT12 5EE），£12/24小时，步行2分钟。退房时带停车票到前台享受折扣。' }, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Leonardo+Hotel+Belfast+Great+Victoria+Street' },
+    pdfs: ['20260408-09 - hotel - Leonardo Belfast.pdf'],
+  },
+  {
+    date: '2026-04-09', weekday: 'thu',
+    title: { en: 'Belfast — Group Splits', zh: '贝尔法斯特 — 分组行动' },
+    location: { en: 'Belfast / Dublin', zh: '贝尔法斯特 / 都柏林' },
+    travelers: 'travelers_all',
+    weatherKey: 'belfast',
+    isSplitDay: true,
+    segmentsGroupA: {
+      label: 'group_sijia',
+      segments: [
+        { type: 'drive', icon: '🚗', title: { en: 'Leonardo Hotel → Belfast City Airport', zh: 'Leonardo酒店 → 贝尔法斯特城市机场' }, time: '~13:00 – 13:15', duration: '~15 min' },
+        { type: 'activity', icon: '🔑', title: { en: 'Return hire car at airport', zh: '机场还车' }, time: '~13:15', duration: '' },
+        { type: 'flight', icon: '✈️', title: { en: 'BA1401: Belfast City → London Heathrow', zh: 'BA1401: 贝尔法斯特 → 伦敦希思罗' }, time: '16:35 – 17:55', duration: '1h 20m' },
+      ]
+    },
+    segmentsGroupB: {
+      label: 'group_family',
+      segments: [
+        { type: 'drive', icon: '🚕', title: { en: 'Leonardo Hotel → Belfast Grand Central', zh: 'Leonardo酒店 → 贝尔法斯特中央站' }, time: '~14:30', duration: '~10 min taxi' },
+        { type: 'train', icon: '🚂', title: { en: 'Enterprise: Belfast Grand Central → Dublin Connolly', zh: 'Enterprise 火车: 贝尔法斯特中央站 → 都柏林康诺利站' }, time: '15:00 – 17:13', duration: '2h 13m' },
+        { type: 'drive', icon: '🚕', title: { en: 'Station → Clayton Hotel Charlemont', zh: '车站 → Clayton 酒店' }, time: '~17:15 – 17:30', duration: '~15 min' },
+      ]
+    },
+    segments: [
+      { type: 'activity', icon: '🥐', title: { en: 'Breakfast at Maggie Mays, Botanic Avenue (informal, big menu)', zh: '早餐：Maggie Mays, Botanic Avenue（随性，菜单丰富）' }, time: '~08:30 – 09:15', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Maggie+Mays+Botanic+Avenue+Belfast' },
+      { type: 'activity', icon: '🐟', title: { en: 'The Big Fish — waterfront sculpture', zh: '大鱼雕塑 — 河边雕塑' }, time: '~09:30 – 09:50', duration: 'photo stop · 15 min walk from hotel', mapUrl: 'https://www.google.com/maps/search/?api=1&query=The+Big+Fish+Belfast' },
+      { type: 'activity', icon: '🏙️', title: { en: 'Cathedral Quarter — walk through narrow streets & pubs', zh: '大教堂区 — 漫步窄巷和酒吧街' }, time: '~10:00 – 10:30', duration: '~30 min · free', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Cathedral+Quarter+Belfast' },
+      { type: 'activity', icon: '☕', title: { en: 'Established Coffee, Cathedral Quarter', zh: '咖啡：Established Coffee, 大教堂区' }, time: '~10:30 – 10:50', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Established+Coffee+Belfast' },
+      { type: 'activity', icon: '🍽️', title: { en: 'Lunch at Fratelli, Great Victoria St (kids can build their own pizza)', zh: '午餐：Fratelli, Great Victoria St（孩子可自制披萨）' }, time: '~11:15 – 12:15', duration: 'near hotel', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Fratelli+Great+Victoria+Street+Belfast' },
+      { type: 'activity', icon: '🅿️', title: { en: 'Collect car from Great Northern Carpark (bring ticket to reception first for discount)', zh: '从Great Northern停车场取车（先到前台出示停车票享受折扣）' }, time: '~12:30', duration: '' },
+    ],
+    activities: {
+      en: ['Relaxed morning — City Hall done yesterday, Botanic Gardens done Monday', 'Big Fish + Cathedral Quarter walk (both free)', 'S returns to London after lunch', 'Family continues to Dublin by train'],
+      zh: ['轻松上午 — 市政厅昨天已去，植物园周一已去', '大鱼雕塑 + 大教堂区散步（均免费）', 'S午餐后返回伦敦', '家人乘火车前往都柏林']
+    },
+    hotel: { name: 'Clayton Hotel Charlemont Dublin City', addr: '2 Charlemont Street, Dublin', rooms: 2, checkin: '15:00', checkout: '11:00', note: { en: 'Family only — pay at property', zh: '仅家人 — 到店支付' }, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Clayton+Hotel+Charlemont+Dublin+City' },
+    pdfs: ['20260408-09 - hotel - Leonardo Belfast.pdf', '20260409 - travel - BA1401.pdf', '20260409 - travel - Enterprise train Belfast-Dublin.pdf', '20260409-11 - hotel - Clayton Dublin.pdf'],
+  },
+  {
+    date: '2026-04-10', weekday: 'fri',
+    title: { en: 'Dublin — Sightseeing Day', zh: '都柏林 — 观光日' },
+    location: { en: 'Dublin', zh: '都柏林' },
+    travelers: 'travelers_5',
+    weatherKey: 'dublin',
+    segments: [
+      { type: 'activity', icon: '🥐', title: { en: 'Breakfast at Alma Café, Portobello (Argentinean-inspired)', zh: '早餐：Alma Café, Portobello（阿根廷风味）' }, time: '~08:30 – 09:15', duration: '5 min walk from hotel', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Alma+Cafe+Portobello+Dublin' },
+      { type: 'activity', icon: '🍽️', title: { en: 'Lunch: The Phoenix Café (if Option A) / Beshoff Bros fish & chips (if Option B — Howth)', zh: '午餐：The Phoenix Café（方案A）/ Beshoff Bros炸鱼薯条（方案B — Howth）' }, time: '~12:30 – 13:30', duration: '' },
+      { type: 'activity', icon: '☕', title: { en: 'The Cake Café — accessed through a bookshop, quiet courtyard', zh: '咖啡甜点：The Cake Café — 穿过书店进入，安静庭院' }, time: '~15:00 – 15:30', duration: 'off Camden Street', mapUrl: 'https://www.google.com/maps/search/?api=1&query=The+Cake+Cafe+Camden+Street+Dublin' },
+    ],
+    activities: {
+      en: [
+        'Option A: Phoenix Park + Farmleigh (green / garden day)',
+        'Option B: Howth + seafood (if weather is good)',
+        'Explore at a relaxed pace',
+      ],
+      zh: [
+        '方案A: 凤凰公园 + Farmleigh（绿地花园日）',
+        '方案B: Howth + 海鲜（天气好的话）',
+        '轻松节奏游览',
+      ]
+    },
+    hotel: { name: 'Clayton Hotel Charlemont Dublin City', addr: '2 Charlemont Street, Dublin', rooms: 2, checkin: '–', checkout: '11:00', note: { en: '2nd night', zh: '第二晚' }, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Clayton+Hotel+Charlemont+Dublin+City' },
+    pdfs: ['20260409-11 - hotel - Clayton Dublin.pdf'],
+  },
+  {
+    date: '2026-04-11', weekday: 'sat',
+    title: { en: 'Dublin → Rock of Cashel → Cork', zh: '都柏林 → 凯舍尔岩 → 科克' },
+    location: { en: 'Dublin → Cork', zh: '都柏林 → 科克' },
+    travelers: 'travelers_5',
+    weatherKey: 'cork',
+    segments: [
+      { type: 'activity', icon: '🥐', title: { en: 'Breakfast (TBD — at Clayton Hotel or nearby, before checkout)', zh: '早餐（待定 — Clayton酒店或附近，退房前）' }, time: '~08:00 – 08:30', duration: '' },
+      { type: 'drive', icon: '🚗', title: { en: 'Pick up Dublin hire car', zh: '取都柏林租车' }, time: '~09:00', duration: '' },
+      { type: 'drive', icon: '🚗', title: { en: 'Dublin → Rock of Cashel', zh: '都柏林 → 凯舍尔岩' }, time: '~09:30 – 11:20', duration: '1h 50m · 160 km' },
+      { type: 'activity', icon: '🏰', title: { en: 'Rock of Cashel', zh: '凯舍尔岩' }, time: '~11:30 – 12:30', duration: '~1h visit', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Rock+of+Cashel+Ireland' },
+      { type: 'activity', icon: '🍽️', title: { en: 'Lunch at Mikey Ryan\'s Bar & Kitchen, Cashel (locally sourced)', zh: '午餐：Mikey Ryan\'s Bar & Kitchen, Cashel（本地食材）' }, time: '~12:30 – 13:10', duration: 'next to Rock of Cashel', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Mikey+Ryans+Bar+Kitchen+Cashel' },
+      { type: 'activity', icon: '☕', title: { en: 'Bakehouse 22 — bakery on Cashel main street', zh: '咖啡甜点：Bakehouse 22 — Cashel主街面包店' }, time: '~13:10 – 13:20', duration: 'quick stop', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Bakehouse+22+Cashel' },
+      { type: 'drive', icon: '🚗', title: { en: 'Rock of Cashel → Cork', zh: '凯舍尔岩 → 科克' }, time: '~13:15 – 14:30', duration: '1h 15m · 100 km' },
+    ],
+    activities: {
+      en: ['Main transfer day south through Ireland', 'Rock of Cashel — medieval fortress on the hilltop'],
+      zh: ['爱尔兰南下主要行驶日', '凯舍尔岩 — 山顶中世纪堡垒']
+    },
+    hotel: { name: 'Moxy Cork', addr: 'Camden Place, Cork, T23 C2RR', rooms: 2, checkin: '15:00', checkout: '11:00', note: { en: 'Prepaid — non-refundable (€554)', zh: '已预付 — 不可退款（€554）' }, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Moxy+Cork+Camden+Place' },
+    pdfs: ['20260411-13 - hotel - Moxy Cork.pdf'],
+  },
+  {
+    date: '2026-04-12', weekday: 'sun',
+    title: { en: 'Cork — Easy City Day', zh: '科克 — 轻松城市日' },
+    location: { en: 'Cork', zh: '科克' },
+    travelers: 'travelers_5',
+    weatherKey: 'cork',
+    segments: [
+      { type: 'activity', icon: '🥐', title: { en: 'Breakfast at Good Day Deli, Nano Nagle Place (sustainable café)', zh: '早餐：Good Day Deli, Nano Nagle Place（可持续咖啡馆）' }, time: '~08:30 – 09:15', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Good+Day+Deli+Nano+Nagle+Place+Cork' },
+      { type: 'activity', icon: '🍽️', title: { en: 'Lunch at Farmgate Café — mezzanine of English Market (seafood)', zh: '午餐：Farmgate Café — 英国市场二层（海鲜）' }, time: '~12:30 – 13:30', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Farmgate+Cafe+English+Market+Cork' },
+      { type: 'activity', icon: '☕', title: { en: 'The Bookshelf Coffee House — speciality coffee & bakes', zh: '咖啡甜点：The Bookshelf Coffee House' }, time: '~15:00 – 15:30', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=The+Bookshelf+Coffee+House+Cork' },
+    ],
+    activities: {
+      en: ['Cork Victorian Quarter', 'English Market — local food and crafts', 'Seafood lunch', 'Easy walking — no big drives today'],
+      zh: ['科克维多利亚区', '英国市场 — 当地美食和工艺品', '海鲜午餐', '轻松步行 — 今天不长途驾驶']
+    },
+    hotel: { name: 'Moxy Cork', addr: 'Camden Place, Cork, T23 C2RR', rooms: 2, checkin: '–', checkout: '11:00', note: { en: '2nd night', zh: '第二晚' }, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Moxy+Cork+Camden+Place' },
+    pdfs: ['20260411-13 - hotel - Moxy Cork.pdf'],
+  },
+  {
+    date: '2026-04-13', weekday: 'mon',
+    title: { en: 'Fota / Cobh → Cork Airport → London', zh: 'Fota / 科芙 → 科克机场 → 伦敦' },
+    location: { en: 'Cork / Cobh', zh: '科克 / 科芙' },
+    travelers: 'travelers_5',
+    weatherKey: 'cork',
+    segments: [
+      { type: 'activity', icon: '🥐', title: { en: 'Breakfast near Moxy Cork (TBD, before checkout)', zh: '早餐：Moxy Cork附近（待定，退房前）' }, time: '~08:30 – 09:00', duration: '' },
+      { type: 'drive', icon: '🚗', title: { en: 'Cork → Fota House & Gardens', zh: '科克 → Fota庄园及花园' }, time: '~10:00 – 10:25', duration: '25 min · 20 km' },
+      { type: 'activity', icon: '🏛️', title: { en: 'Fota House and Gardens', zh: 'Fota庄园及花园' }, time: '~10:30 – 12:00', duration: '~1.5h visit', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Fota+House+and+Gardens+Cork' },
+      { type: 'drive', icon: '🚗', title: { en: 'Fota → Cobh', zh: 'Fota → 科芙' }, time: '~12:00 – 12:15', duration: '15 min · 8 km' },
+      { type: 'activity', icon: '⛵', title: { en: 'Cobh — colourful harbour town', zh: '科芙 — 多彩海港小镇' }, time: '~12:15 – 13:00', duration: 'explore streets', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Cobh+Ireland' },
+      { type: 'activity', icon: '🍽️', title: { en: 'Lunch at Seasalt Cobh (coastal café)', zh: '午餐：Seasalt Cobh（海边咖啡馆）' }, time: '~13:00 – 13:45', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Seasalt+Cobh' },
+      { type: 'activity', icon: '☕', title: { en: 'Truly Scrumptious — traditional tea room near harbour', zh: '咖啡甜点：Truly Scrumptious — 港口旁传统茶室' }, time: '~14:00 – 14:30', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Truly+Scrumptious+Cobh' },
+      { type: 'drive', icon: '🚗', title: { en: 'Cobh → Cork Airport (return car)', zh: '科芙 → 科克机场（还车）' }, time: '~15:30 – 15:55', duration: '25 min · 25 km' },
+      { type: 'flight', icon: '✈️', title: { en: 'BA5924 (Aer Lingus): Cork → London Heathrow', zh: 'BA5924（爱尔兰航空）: 科克 → 伦敦希思罗' }, time: '20:30 – 21:45', duration: '1h 15m' },
+    ],
+    activities: {
+      en: ['Final sightseeing before heading home', 'Return hire car at Cork Airport'],
+      zh: ['回家前最后观光', '科克机场还车']
+    },
+    hotel: null,
+    pdfs: ['20260413 - travel - BA5924.pdf'],
+  },
+];
+
+const weatherLocations = {
+  belfast: { lat: 54.5973, lon: -5.9301 },
+  derry:   { lat: 54.9966, lon: -7.3086 },
+  dublin:  { lat: 53.3498, lon: -6.2603 },
+  cork:    { lat: 51.8969, lon: -8.4863 },
+};
+
+const weatherCodeIcons = {
+  0: '☀️', 1: '🌤️', 2: '⛅', 3: '☁️',
+  45: '🌫️', 48: '🌫️',
+  51: '🌦️', 53: '🌧️', 55: '🌧️',
+  56: '🌧️', 57: '🌧️',
+  61: '🌦️', 63: '🌧️', 65: '🌧️',
+  66: '🌧️', 67: '🌧️',
+  71: '🌨️', 73: '🌨️', 75: '❄️',
+  77: '🌨️',
+  80: '🌦️', 81: '🌧️', 82: '⛈️',
+  85: '🌨️', 86: '🌨️',
+  95: '⛈️', 96: '⛈️', 99: '⛈️',
+};
+
+// ── Weather data store ──
+let weatherData = {};
+
+async function fetchWeather() {
+  const locs = Object.entries(weatherLocations);
+  const promises = locs.map(([key, { lat, lon }]) =>
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,precipitation_probability,precipitation,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max&timezone=Europe%2FLondon&start_date=2026-04-06&end_date=2026-04-13`)
+      .then(r => r.json())
+      .then(data => { weatherData[key] = data; })
+      .catch(() => { weatherData[key] = null; })
+  );
+  await Promise.all(promises);
+  render();
+}
+
+function getHourlyForDay(locationKey, dateStr) {
+  const data = weatherData[locationKey];
+  if (!data || !data.hourly) return null;
+  const hours = [];
+  for (let h = 7; h <= 22; h++) {
+    const timeStr = `${dateStr}T${String(h).padStart(2,'0')}:00`;
+    const idx = data.hourly.time.indexOf(timeStr);
+    if (idx === -1) continue;
+    hours.push({
+      hour: h,
+      temp: data.hourly.temperature_2m[idx],
+      rainProb: data.hourly.precipitation_probability[idx],
+      precip: data.hourly.precipitation[idx],
+      code: data.hourly.weather_code[idx],
+      wind: data.hourly.wind_speed_10m[idx],
+    });
+  }
+  return hours.length > 0 ? hours : null;
+}
+
+function getDailyForDay(locationKey, dateStr) {
+  const data = weatherData[locationKey];
+  if (!data || !data.daily) return null;
+  const idx = data.daily.time.indexOf(dateStr);
+  if (idx === -1) return null;
+  return {
+    maxTemp: data.daily.temperature_2m_max[idx],
+    minTemp: data.daily.temperature_2m_min[idx],
+    precipSum: data.daily.precipitation_sum[idx],
+    maxRainProb: data.daily.precipitation_probability_max[idx],
+  };
+}
+
+// ── Rendering ──
+let activeDay = 0;
+
+function render() {
+  renderNav();
+  renderDays();
+}
+
+function renderNav() {
+  const nav = document.getElementById('dayNav');
+  const weekdays = ['mon','tue','wed','thu','fri','sat','sun'];
+  nav.innerHTML = days.map((d, i) => {
+    const dateNum = d.date.slice(-2);
+    const wd = t(d.weekday);
+    return `<button class="${i === activeDay ? 'active' : ''}" onclick="switchDay(${i})">${wd} ${dateNum}</button>`;
+  }).join('');
+}
+
+function switchDay(i) {
+  activeDay = i;
+  render();
+  document.getElementById('dayNav').children[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+}
+
+function renderDays() {
+  const main = document.getElementById('main');
+  main.innerHTML = days.map((d, i) => `
+    <div class="day-section ${i === activeDay ? 'active' : ''}" id="day-${i}">
+      ${renderDayHeader(d)}
+      ${d.isSplitDay ? renderSplitItinerary(d) : renderItinerary(d)}
+      ${renderActivities(d)}
+      ${d.hotel ? renderHotel(d.hotel) : ''}
+      ${renderWeather(d)}
+      ${renderDocs(d)}
+    </div>
+  `).join('');
+}
+
+function renderDayHeader(d) {
+  const daily = getDailyForDay(d.weatherKey, d.date);
+  let rainClass = '';
+  let rainMsg = '';
+  if (daily) {
+    if (daily.maxRainProb >= 60) { rainClass = 'red'; rainMsg = t('rain_likely'); }
+    else if (daily.maxRainProb >= 35) { rainClass = 'amber'; rainMsg = t('rain_possible'); }
+  }
+  const dateObj = new Date(d.date + 'T12:00:00');
+  const dateFormatted = dateObj.toLocaleDateString(currentLang === 'zh' ? 'zh-CN' : 'en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  return `
+    <div class="day-header">
+      <h2>${d.title[currentLang] || d.title.en}</h2>
+      <div class="subtitle">${dateFormatted} · ${d.location[currentLang] || d.location.en}</div>
+      <span class="traveler-badge">${t(d.travelers)}</span>
+      ${rainMsg ? `<div class="rain-warning ${rainClass}">🌧️ ${rainMsg}</div>` : ''}
+    </div>`;
+}
+
+function parseTimeRange(timeStr) {
+  if (!timeStr) return { start: '', end: '' };
+  const rangeMatch = timeStr.match(/~?(\d{1,2}:\d{2})\s*[–-]\s*~?(\d{1,2}:\d{2})/);
+  if (rangeMatch) return { start: rangeMatch[1], end: rangeMatch[2] };
+  const singleMatch = timeStr.match(/~?(\d{1,2}:\d{2})/);
+  if (singleMatch) return { start: singleMatch[1], end: '' };
+  return { start: '', end: '' };
+}
+
+function parseStartHour(timeStr) {
+  if (!timeStr) return null;
+  const match = timeStr.match(/~?(\d{1,2}):\d{2}/);
+  return match ? parseInt(match[1]) : null;
+}
+
+function getWeatherForHour(hourlyData, hour) {
+  if (!hourlyData || hour === null) return null;
+  return hourlyData.find(h => h.hour === hour) || null;
+}
+
+function renderWeatherInline(w) {
+  if (!w) return '';
+  const icon = weatherCodeIcons[w.code] || '';
+  const parts = [`${icon}${Math.round(w.temp)}°`];
+  if (w.rainProb >= 25) parts.push(`💧${w.rainProb}%`);
+  if (w.wind >= 20) parts.push(`💨${Math.round(w.wind)}`);
+  let cls = 'wi-clear';
+  if (w.rainProb >= 60) cls = 'wi-heavy';
+  else if (w.rainProb >= 35) cls = 'wi-rainy';
+  return `<span class="weather-inline ${cls}">${parts.join(' ')}</span>`;
+}
+
+function renderSegment(seg, hourlyData) {
+  const { start, end } = parseTimeRange(seg.time);
+  const startHour = parseStartHour(seg.time);
+  const w = getWeatherForHour(hourlyData, startHour);
+  const titleText = seg.title[currentLang] || seg.title.en;
+  const titleHtml = seg.mapUrl
+    ? `<a href="${seg.mapUrl}" target="_blank" rel="noopener" style="color:inherit;text-decoration-line:underline;text-decoration-style:dotted;text-underline-offset:3px">${titleText}</a>`
+    : titleText;
+  const weatherHtml = seg.type === 'activity' ? renderWeatherInline(w) : '';
+  return `
+    <div class="segment ${seg.type}">
+      <div class="time-col">
+        ${start ? `<div class="time-start">${start}</div>` : ''}
+        ${end ? `<div class="time-end">${end}</div>` : ''}
+      </div>
+      <div class="dot">${seg.icon}</div>
+      <div class="info">
+        <h4>${titleHtml} ${weatherHtml}</h4>
+        <p>${seg.duration || ''}</p>
+      </div>
+    </div>`;
+}
+
+function renderItinerary(d) {
+  if (!d.segments || d.segments.length === 0) return '';
+  const hourly = getHourlyForDay(d.weatherKey, d.date);
+  return `
+    <div class="card">
+      <h3>${t('itinerary')}</h3>
+      <div class="timeline">${d.segments.map(seg => renderSegment(seg, hourly)).join('')}</div>
+    </div>`;
+}
+
+function renderSplitItinerary(d) {
+  const gA = d.segmentsGroupA;
+  const gB = d.segmentsGroupB;
+  const hourly = getHourlyForDay(d.weatherKey, d.date);
+  const morningHtml = d.segments && d.segments.length > 0
+    ? `<div class="timeline" style="margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:2px solid var(--gray-200)">${d.segments.map(seg => renderSegment(seg, hourly)).join('')}</div>`
+    : '';
+  return `
+    <div class="card">
+      <h3>${t('itinerary')}</h3>
+      ${morningHtml}
+      <div class="group-block">
+        <h4>${t(gA.label)}</h4>
+        <div class="timeline">${gA.segments.map(seg => renderSegment(seg, hourly)).join('')}</div>
+      </div>
+      <div class="group-block">
+        <h4>${t(gB.label)}</h4>
+        <div class="timeline">${gB.segments.map(seg => renderSegment(seg, hourly)).join('')}</div>
+      </div>
+    </div>`;
+}
+
+function renderActivities(d) {
+  const items = d.activities[currentLang] || d.activities.en;
+  if (!items || items.length === 0) return '';
+  return `
+    <div class="card activities">
+      <h3>${t('activities')}</h3>
+      <ul>${items.map(a => `<li>${a}</li>`).join('')}</ul>
+    </div>`;
+}
+
+function renderHotel(h) {
+  const note = h.note ? (h.note[currentLang] || h.note.en) : '';
+  const nameHtml = h.mapUrl
+    ? `<a href="${h.mapUrl}" target="_blank" rel="noopener" style="color:inherit;text-decoration-line:underline;text-decoration-style:dotted;text-underline-offset:3px">${h.name}</a>`
+    : h.name;
+  return `
+    <div class="card hotel-card">
+      <h3>🏨 ${t('hotel')}</h3>
+      <div class="hotel-name">${nameHtml}</div>
+      <div class="hotel-detail">${h.addr}</div>
+      <div class="hotel-detail">${h.rooms} ${t('rooms')} · ${t('checkin')}: ${h.checkin} · ${t('checkout')}: ${h.checkout}</div>
+      ${note ? `<div class="hotel-detail" style="margin-top:4px;color:var(--amber);font-weight:500">${note}</div>` : ''}
+    </div>`;
+}
+
+function renderWeather(d) {
+  const hourly = getHourlyForDay(d.weatherKey, d.date);
+  const daily = getDailyForDay(d.weatherKey, d.date);
+  if (!weatherData[d.weatherKey]) {
+    return `<div class="card"><h3>${t('weather')} — ${d.location[currentLang] || d.location.en}</h3><div class="weather-loading">${t('loading_weather')}</div></div>`;
+  }
+  if (!hourly) {
+    return `<div class="card"><h3>${t('weather')}</h3><div class="weather-loading">${t('weather_unavailable')}</div></div>`;
+  }
+  const summaryHtml = daily ? `
+    <div class="weather-summary-row">
+      <div class="ws-item">🌡️ <strong>${daily.minTemp}° – ${daily.maxTemp}°C</strong></div>
+      <div class="ws-item">💧 ${currentLang === 'zh' ? '总降水' : 'Total rain'}: <strong>${daily.precipSum} mm</strong></div>
+      <div class="ws-item">☔ ${currentLang === 'zh' ? '最高概率' : 'Max chance'}: <strong>${daily.maxRainProb}%</strong></div>
+    </div>` : '';
+
+  const hoursHtml = hourly.map(h => {
+    const icon = weatherCodeIcons[h.code] || '❓';
+    const rainH = h.rainProb >= 60 ? 'rain-red' : h.rainProb >= 35 ? 'rain-amber' : '';
+    const barColor = h.rainProb >= 60 ? 'var(--red)' : h.rainProb >= 35 ? 'var(--amber)' : '#90caf9';
+    const barHeight = Math.max(2, (h.rainProb / 100) * 28);
+    const ampm = h.hour < 12 ? 'am' : 'pm';
+    const displayH = h.hour <= 12 ? h.hour : h.hour - 12;
+    return `
+      <div class="weather-hour ${rainH}">
+        <div class="wh-time">${displayH}${ampm}</div>
+        <div class="wh-icon">${icon}</div>
+        <div class="wh-temp">${Math.round(h.temp)}°</div>
+        <div class="wh-rain-bar"><div class="bar" style="height:${barHeight}px;background:${barColor}"></div></div>
+        <div class="wh-rain-pct">${h.rainProb}%</div>
+      </div>`;
+  }).join('');
+
+  return `
+    <div class="card">
+      <h3>${t('weather')} — ${d.location[currentLang] || d.location.en}</h3>
+      ${summaryHtml}
+      <div class="weather-grid">${hoursHtml}</div>
+    </div>`;
+}
+
+function renderDocs(d) {
+  if (!d.pdfs || d.pdfs.length === 0) return '';
+  return `
+    <div class="card">
+      <h3>📄 ${t('documents')}</h3>
+      <div class="doc-list">${d.pdfs.map(p => `<span class="doc-tag">${p}</span>`).join('')}</div>
+    </div>`;
+}
+
+// ── Init ──
+render();
+fetchWeather();
+</script>
+</body>
+</html>
