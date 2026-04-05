@@ -383,6 +383,7 @@ function setLang(lang) {
   currentLang = lang;
   document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b.textContent.trim() === (lang === 'en' ? 'EN' : '中文')));
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t(el.dataset.t); });
   render();
 }
 
@@ -892,6 +893,7 @@ function renderDocs(d) {
 }
 
 // ── Init ──
+document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t(el.dataset.t); });
 render();
 fetchWeather();
 </script>
