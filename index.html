@@ -601,16 +601,14 @@ const days = [
   },
   {
     date: '2026-04-13', weekday: 'mon',
-    title: { en: 'English Market → Camden Fort → Cobh → London', zh: '英国市场 → Camden堡垒 → 科芙 → 伦敦' },
-    location: { en: 'Cork / Crosshaven / Cobh', zh: '科克 / Crosshaven / 科芙' },
+    title: { en: 'English Market → Cobh → London', zh: '英国市场 → 科芙 → 伦敦' },
+    location: { en: 'Cork / Cobh', zh: '科克 / 科芙' },
     travelers: 'travelers_5',
     weatherKey: 'cork',
     segments: [
       { type: 'activity', icon: '🥐', title: { en: 'Breakfast at Moxy Cork (M to confirm price with hotel)', zh: '早餐：Moxy Cork酒店内（M需和酒店确认早餐价格）' }, time: '~08:30 – 09:00', duration: '' },
       { type: 'activity', icon: '🏪', title: { en: 'The English Market — mezzanine viewing & regional produce', zh: '英国市场 — 俯瞰 & 当地特产' }, time: '~09:30 – 11:00', duration: '~1.5h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=English+Market+Cork' },
-      { type: 'drive', icon: '🚗', title: { en: 'Cork → Camden Fort Meagher, Crosshaven', zh: '科克 → Camden Fort Meagher, Crosshaven' }, time: '~11:00 – 11:30', duration: '30 min' },
-      { type: 'activity', icon: '🏰', title: { en: 'Camden Fort Meagher — coastal defence fort (check Monday opening hours!)', zh: 'Camden Fort Meagher — 海岸防御堡垒（请确认周一开放时间！）' }, time: '~11:30 – 13:30', duration: '~2h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Camden+Fort+Meagher+Crosshaven' },
-      { type: 'drive', icon: '🚗', title: { en: 'Crosshaven → Cobh', zh: 'Crosshaven → 科芙' }, time: '~13:30 – 14:00', duration: '30 min' },
+      { type: 'drive', icon: '🚗', title: { en: 'Cork → Cobh', zh: '科克 → 科芙' }, time: '~11:00 – 11:30', duration: '30 min' },
       { type: 'activity', icon: '⛪', title: { en: 'St Colman\'s Cathedral, Cobh', zh: '圣科尔曼大教堂, 科芙' }, time: '~14:00 – 14:15', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=St+Colmans+Cathedral+Cobh' },
       { type: 'activity', icon: '🏘️', title: { en: 'Deck of Cards houses — colourful terraced street', zh: '"扑克牌"彩色房子 — 彩色阶梯街道' }, time: '~14:15 – 14:30', duration: '5 min walk from cathedral', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Deck+of+Cards+Houses+Cobh' },
       { type: 'activity', icon: '🍽️', title: { en: 'Late lunch at Seasalt Cobh', zh: '晚午餐：Seasalt Cobh' }, time: '~14:30 – 15:15', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Seasalt+Cobh' },
@@ -620,8 +618,8 @@ const days = [
       { type: 'flight', icon: '✈️', title: { en: 'BA5924 (Aer Lingus): Cork → London Heathrow', zh: 'BA5924（爱尔兰航空）: 科克 → 伦敦希思罗' }, time: '20:30 – 21:45', duration: '1h 15m' },
     ],
     activities: {
-      en: ['English Market morning — Cork\'s food heritage', 'Camden Fort Meagher — verify Monday opening before travel!', 'Cobh — Deck of Cards houses + St Colman\'s Cathedral', 'Return hire car at Cork Airport'],
-      zh: ['英国市场上午游览 — 科克美食文化', 'Camden Fort Meagher — 出发前确认周一开放时间！', '科芙 — 扑克牌彩色房子 + 圣科尔曼大教堂', '科克机场还车']
+      en: ['English Market morning — Cork\'s food heritage', 'Cobh — Deck of Cards houses + St Colman\'s Cathedral', 'Return hire car at Cork Airport'],
+      zh: ['英国市场上午游览 — 科克美食文化', '科芙 — 扑克牌彩色房子 + 圣科尔曼大教堂', '科克机场还车']
     },
     hotel: null,
     pdfs: ['20260413 - travel - BA5924.pdf'],
@@ -991,7 +989,6 @@ const dayLocations = [
   // Day 8 — Mon Cork→Cobh→London
   [
     { lat: 51.8975, lon: -8.4735, en: 'English Market', zh: '英国市场' },
-    { lat: 51.8100, lon: -8.3050, en: 'Camden Fort Meagher', zh: 'Camden Fort Meagher' },
     { lat: 51.8510, lon: -8.2945, en: "St Colman's Cathedral", zh: '圣科尔曼大教堂' },
     { lat: 51.8500, lon: -8.2960, en: 'Deck of Cards houses', zh: '"扑克牌"彩色房子' },
     { lat: 51.8505, lon: -8.2950, en: 'Seasalt Cobh (lunch)', zh: 'Seasalt Cobh（午餐）' },
