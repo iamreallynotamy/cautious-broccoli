@@ -1014,9 +1014,10 @@ function initMapForDay(dayIndex) {
   if (currentMap) { currentMap.remove(); currentMap = null; }
   const map = L.map(el, { scrollWheelZoom: false });
   currentMap = map;
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap',
-    maxZoom: 18,
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '© <a href="https://carto.com/">CARTO</a> © <a href="https://www.openstreetmap.org/">OSM</a>',
+    maxZoom: 19,
+    subdomains: 'abcd',
   }).addTo(map);
   const markers = locs.map((loc, i) => {
     const icon = L.divIcon({
