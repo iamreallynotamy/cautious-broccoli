@@ -578,7 +578,7 @@ const days = [
   },
   {
     date: '2026-04-12', weekday: 'sun',
-    title: { en: 'Cork — Blarney Castle & City', zh: '科克 — 布拉尼城堡 & 市区' },
+    title: { en: 'Cork — Blarney Castle (relaxed day)', zh: '科克 — 布拉尼城堡（轻松一日）' },
     location: { en: 'Blarney / Cork', zh: '布拉尼 / 科克' },
     travelers: 'travelers_5',
     weatherKey: 'cork',
@@ -588,13 +588,13 @@ const days = [
       { type: 'activity', icon: '🏰', title: { en: 'Blarney Castle & Gardens (Rock Close, Poison Garden — kid-friendly grounds)', zh: '布拉尼城堡 & 花园（Rock Close、毒药花园 — 适合孩子）' }, time: '~09:45 – 13:00', duration: '~3h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Blarney+Castle+Cork' },
       { type: 'activity', icon: '🍽️', title: { en: 'Lunch at Blarney Castle Hotel or village café', zh: '午餐：布拉尼城堡酒店或村中咖啡馆' }, time: '~13:00 – 14:00', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Blarney+Castle+Hotel' },
       { type: 'drive', icon: '🚗', title: { en: 'Blarney → Cork City', zh: '布拉尼 → 科克市区' }, time: '~14:00 – 14:15', duration: '15 min' },
-      { type: 'activity', icon: '🏛️', title: { en: 'Cork City Gaol — audio tour & historical exhibits', zh: '科克城市监狱 — 语音导览 & 历史展览' }, time: '~14:30 – 16:30', duration: '~2h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Cork+City+Gaol' },
-      { type: 'activity', icon: '🌳', title: { en: 'Fitzgerald Park — playground for kids', zh: 'Fitzgerald Park — 儿童游乐场' }, time: '~16:30 – 17:30', duration: '~1h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Fitzgerald+Park+Cork' },
+      { type: 'activity', icon: '🚶', title: { en: 'Cork Victorian Quarter — relaxed walk & shopping', zh: '科克维多利亚区 — 轻松散步和购物' }, time: '~14:30 – 16:30', duration: 'relaxed pace', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Victorian+Quarter+Cork' },
+      { type: 'activity', icon: '☕', title: { en: 'The Bookshelf Coffee House', zh: '咖啡甜点：The Bookshelf Coffee House' }, time: '~16:30 – 17:00', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=The+Bookshelf+Coffee+House+Cork' },
       { type: 'activity', icon: '🍽️', title: { en: 'Dinner at Scoozi, Cork centre', zh: '晚餐：Scoozi, 科克市中心' }, time: '~19:00', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Scoozi+Cork' },
     ],
     activities: {
-      en: ['Blarney Castle: focus on gardens & grounds (kid-friendly)', 'Cork City Gaol: atmospheric audio tour', 'Fitzgerald Park has playground for energy burn'],
-      zh: ['布拉尼城堡：重点游览花园和庭院（适合孩子）', '科克城市监狱：沉浸式语音导览', 'Fitzgerald Park有儿童游乐场']
+      en: ['Blarney Castle: focus on gardens & grounds (kid-friendly)', 'Relaxed afternoon in Cork — no rushing', 'Victorian Quarter walk + coffee'],
+      zh: ['布拉尼城堡：重点游览花园和庭院（适合孩子）', '科克轻松下午 — 不赶时间', '维多利亚区散步 + 咖啡']
     },
     hotel: { name: 'Moxy Cork', addr: 'Camden Place, Cork, T23 C2RR', rooms: 2, checkin: '–', checkout: '11:00', note: { en: '2nd night', zh: '第二晚' }, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Moxy+Cork+Camden+Place' },
     pdfs: ['20260411-13 - hotel - Moxy Cork.pdf'],
@@ -607,19 +607,20 @@ const days = [
     weatherKey: 'cork',
     segments: [
       { type: 'activity', icon: '🥐', title: { en: 'Breakfast at Moxy Cork (M to confirm price with hotel)', zh: '早餐：Moxy Cork酒店内（M需和酒店确认早餐价格）' }, time: '~08:30 – 09:00', duration: '' },
-      { type: 'activity', icon: '🏪', title: { en: 'The English Market — mezzanine viewing & regional produce', zh: '英国市场 — 俯瞰 & 当地特产' }, time: '~09:30 – 11:00', duration: '~1.5h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=English+Market+Cork' },
-      { type: 'drive', icon: '🚗', title: { en: 'Cork → Cobh', zh: '科克 → 科芙' }, time: '~11:00 – 11:30', duration: '30 min' },
-      { type: 'activity', icon: '⛪', title: { en: 'St Colman\'s Cathedral, Cobh', zh: '圣科尔曼大教堂, 科芙' }, time: '~14:00 – 14:15', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=St+Colmans+Cathedral+Cobh' },
-      { type: 'activity', icon: '🏘️', title: { en: 'Deck of Cards houses — colourful terraced street', zh: '"扑克牌"彩色房子 — 彩色阶梯街道' }, time: '~14:15 – 14:30', duration: '5 min walk from cathedral', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Deck+of+Cards+Houses+Cobh' },
-      { type: 'activity', icon: '🍽️', title: { en: 'Late lunch at Seasalt Cobh', zh: '晚午餐：Seasalt Cobh' }, time: '~14:30 – 15:15', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Seasalt+Cobh' },
-      { type: 'activity', icon: '☕', title: { en: 'Truly Scrumptious — tea room near harbour', zh: '咖啡甜点：Truly Scrumptious — 港口旁茶室' }, time: '~15:15 – 15:45', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Truly+Scrumptious+Cobh' },
-      { type: 'drive', icon: '🚗', title: { en: 'Cobh → Cork Airport (return car)', zh: '科芙 → 科克机场（还车）' }, time: '~16:00 – 16:25', duration: '25 min' },
-      { type: 'activity', icon: '🔑', title: { en: 'Return hire car & check in', zh: '还车 & 办理登机' }, time: '~16:30 – 18:00', duration: '' },
+      { type: 'activity', icon: '🏛️', title: { en: 'Cork City Gaol — audio tour & historical exhibits', zh: '科克城市监狱 — 语音导览 & 历史展览' }, time: '~09:30 – 11:00', duration: '~1.5h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Cork+City+Gaol' },
+      { type: 'activity', icon: '🌳', title: { en: 'Fitzgerald Park — playground for kids', zh: 'Fitzgerald Park — 儿童游乐场' }, time: '~11:00 – 11:45', duration: '~45 min · right next to Gaol', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Fitzgerald+Park+Cork' },
+      { type: 'activity', icon: '🏪', title: { en: 'The English Market + Farmgate Café lunch', zh: '英国市场 + Farmgate Café 午餐' }, time: '~12:00 – 13:30', duration: 'walk back to centre', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Farmgate+Cafe+English+Market+Cork' },
+      { type: 'drive', icon: '🚗', title: { en: 'Cork → Cobh', zh: '科克 → 科芙' }, time: '~13:30 – 14:00', duration: '30 min east' },
+      { type: 'activity', icon: '⛪', title: { en: 'St Colman\'s Cathedral, Cobh', zh: '圣科尔曼大教堂, 科芙' }, time: '~14:00 – 14:20', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=St+Colmans+Cathedral+Cobh' },
+      { type: 'activity', icon: '🏘️', title: { en: 'Deck of Cards houses — colourful terraced street', zh: '"扑克牌"彩色房子 — 彩色阶梯街道' }, time: '~14:20 – 14:40', duration: '5 min walk from cathedral', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Deck+of+Cards+Houses+Cobh' },
+      { type: 'activity', icon: '☕', title: { en: 'Truly Scrumptious — tea room near harbour', zh: '咖啡甜点：Truly Scrumptious — 港口旁茶室' }, time: '~14:40 – 15:15', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Truly+Scrumptious+Cobh' },
+      { type: 'drive', icon: '🚗', title: { en: 'Cobh → Cork Airport (return car)', zh: '科芙 → 科克机场（还车）' }, time: '~15:30 – 16:00', duration: '25 min south' },
+      { type: 'activity', icon: '🔑', title: { en: 'Return hire car & check in', zh: '还车 & 办理登机' }, time: '~16:00 – 18:00', duration: '' },
       { type: 'flight', icon: '✈️', title: { en: 'BA5924 (Aer Lingus): Cork → London Heathrow', zh: 'BA5924（爱尔兰航空）: 科克 → 伦敦希思罗' }, time: '20:30 – 21:45', duration: '1h 15m' },
     ],
     activities: {
-      en: ['English Market morning — Cork\'s food heritage', 'Cobh — Deck of Cards houses + St Colman\'s Cathedral', 'Return hire car at Cork Airport'],
-      zh: ['英国市场上午游览 — 科克美食文化', '科芙 — 扑克牌彩色房子 + 圣科尔曼大教堂', '科克机场还车']
+      en: ['Efficient W→Centre→E→S sweep: Gaol → English Market → Cobh → Airport', 'No backtracking!', 'Farmgate Café lunch at the English Market'],
+      zh: ['高效路线 西→中→东→南：监狱 → 英国市场 → 科芙 → 机场', '不走回头路！', 'Farmgate Café英国市场午餐']
     },
     hotel: null,
     pdfs: ['20260413 - travel - BA5924.pdf'],
@@ -982,13 +983,14 @@ const dayLocations = [
   [
     { lat: 51.8935, lon: -8.4785, en: 'Good Day Deli (breakfast)', zh: 'Good Day Deli（早餐）' },
     { lat: 51.9290, lon: -8.5710, en: 'Blarney Castle', zh: '布拉尼城堡' },
-    { lat: 51.8990, lon: -8.4920, en: 'Cork City Gaol', zh: '科克城市监狱' },
-    { lat: 51.8950, lon: -8.4930, en: 'Fitzgerald Park', zh: 'Fitzgerald Park' },
+    { lat: 51.8975, lon: -8.4730, en: 'Victorian Quarter + Bookshelf Coffee', zh: '维多利亚区 + Bookshelf Coffee' },
     { lat: 51.8975, lon: -8.4730, en: 'Scoozi (dinner)', zh: 'Scoozi（晚餐）' },
   ],
   // Day 8 — Mon Cork→Cobh→London
   [
-    { lat: 51.8975, lon: -8.4735, en: 'English Market', zh: '英国市场' },
+    { lat: 51.8990, lon: -8.4920, en: 'Cork City Gaol', zh: '科克城市监狱' },
+    { lat: 51.8950, lon: -8.4930, en: 'Fitzgerald Park', zh: 'Fitzgerald Park' },
+    { lat: 51.8975, lon: -8.4735, en: 'English Market + Farmgate Café', zh: '英国市场 + Farmgate Café' },
     { lat: 51.8510, lon: -8.2945, en: "St Colman's Cathedral", zh: '圣科尔曼大教堂' },
     { lat: 51.8500, lon: -8.2960, en: 'Deck of Cards houses', zh: '"扑克牌"彩色房子' },
     { lat: 51.8505, lon: -8.2950, en: 'Seasalt Cobh (lunch)', zh: 'Seasalt Cobh（午餐）' },
