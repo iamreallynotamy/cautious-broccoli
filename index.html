@@ -479,9 +479,13 @@ const days = [
     segmentsGroupB: {
       label: 'group_family',
       segments: [
-        { type: 'drive', icon: '🚕', title: { en: 'Leonardo Hotel → Belfast Grand Central', zh: 'Leonardo酒店 → 贝尔法斯特中央站' }, time: '~14:30', duration: '~10 min taxi' },
-        { type: 'train', icon: '🚂', title: { en: 'Enterprise: Belfast Grand Central → Dublin Connolly', zh: 'Enterprise 火车: 贝尔法斯特中央站 → 都柏林康诺利站' }, time: '15:00 – 17:13', duration: '2h 13m' },
-        { type: 'drive', icon: '🚕', title: { en: 'Station → Clayton Hotel Charlemont', zh: '车站 → Clayton 酒店' }, time: '~17:15 – 17:30', duration: '~15 min' },
+        { type: 'drive', icon: '🚕', title: { en: 'Leonardo Hotel → Belfast Grand Central', zh: 'Leonardo酒店 → 贝尔法斯特中央站' }, time: '~13:30', duration: '~10 min taxi' },
+        { type: 'activity', icon: '☕', title: { en: 'The Pocket — coffee & journey snacks at station', zh: 'The Pocket — 车站买咖啡和零食' }, time: '~13:45', duration: 'print tickets at machine (ref: TRN-1440097372)', mapUrl: 'https://www.google.com/maps/search/?api=1&query=The+Pocket+Belfast+Grand+Central+Station' },
+        { type: 'train', icon: '🚂', title: { en: 'Enterprise: Belfast Grand Central → Dublin Connolly (Coach A, Seats 33/34/37/38)', zh: 'Enterprise 火车: 贝尔法斯特 → 都柏林（A车厢，座位33/34/37/38）' }, time: '15:00 – 17:13', duration: '2h 13m' },
+        { type: 'drive', icon: '🚕', title: { en: 'Connolly Station → Clayton Hotel Charlemont', zh: '康诺利站 → Clayton 酒店' }, time: '~17:15 – 17:30', duration: '~15 min' },
+        { type: 'activity', icon: '🏨', title: { en: 'Check in at Clayton Hotel', zh: '入住Clayton酒店' }, time: '~18:00', duration: '' },
+        { type: 'activity', icon: '🚶', title: { en: 'Grand Canal walk — flat path right outside hotel, let kids run', zh: 'Grand Canal散步 — 酒店门口平坦步道，让孩子们跑跑' }, time: '~18:30 – 19:30', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Grand+Canal+Dublin+Charlemont' },
+        { type: 'activity', icon: '🍽️', title: { en: 'Dinner at Sano Pizza, Ranelagh (fast service, kid-friendly noise level)', zh: '晚餐：Sano Pizza, Ranelagh（出餐快，适合孩子的氛围）' }, time: '~19:30', duration: '10 min walk', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sano+Pizza+Ranelagh+Dublin' },
       ]
     },
     segments: [
@@ -508,20 +512,17 @@ const days = [
     weatherKey: 'dublin',
     segments: [
       { type: 'activity', icon: '🥐', title: { en: 'Breakfast at Alma Café, Portobello (Argentinean-inspired)', zh: '早餐：Alma Café, Portobello（阿根廷风味）' }, time: '~08:30 – 09:15', duration: '5 min walk from hotel', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Alma+Cafe+Portobello+Dublin' },
-      { type: 'activity', icon: '🍽️', title: { en: 'Lunch: The Phoenix Café (if Option A) / Beshoff Bros fish & chips (if Option B — Howth)', zh: '午餐：The Phoenix Café（方案A）/ Beshoff Bros炸鱼薯条（方案B — Howth）' }, time: '~12:30 – 13:30', duration: '' },
-      { type: 'activity', icon: '☕', title: { en: 'The Cake Café — accessed through a bookshop, quiet courtyard', zh: '咖啡甜点：The Cake Café — 穿过书店进入，安静庭院' }, time: '~15:00 – 15:30', duration: 'off Camden Street', mapUrl: 'https://www.google.com/maps/search/?api=1&query=The+Cake+Cafe+Camden+Street+Dublin' },
+      { type: 'train', icon: '🚋', title: { en: 'Luas Green Line to Dublin Castle area', zh: 'Luas绿线到都柏林城堡区域' }, time: '~09:30 – 10:00', duration: '' },
+      { type: 'activity', icon: '🏰', title: { en: 'Dublin Castle courtyard, Dubh Linn Gardens & Chapel Royal', zh: '都柏林城堡庭院、Dubh Linn花园 & 皇家礼拜堂' }, time: '~10:00 – 12:00', duration: '~2h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Dublin+Castle' },
+      { type: 'activity', icon: '📚', title: { en: 'Chester Beatty Library & roof garden', zh: 'Chester Beatty图书馆 & 屋顶花园' }, time: '~12:00 – 13:00', duration: '~1h · free', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Chester+Beatty+Library+Dublin' },
+      { type: 'activity', icon: '🍽️', title: { en: 'Lunch at The Queen of Tarts, Cow\'s Lane', zh: '午餐：The Queen of Tarts, Cow\'s Lane' }, time: '~13:00 – 14:00', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=The+Queen+of+Tarts+Cows+Lane+Dublin' },
+      { type: 'activity', icon: '🌉', title: { en: 'Walk to Ha\'penny Bridge — Liffey views', zh: '步行到半便士桥 — 利菲河风景' }, time: '~14:30 – 15:15', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Ha+penny+Bridge+Dublin' },
+      { type: 'activity', icon: '🎓', title: { en: 'Trinity College & Book of Kells (advance booking required)', zh: '三一学院 & 凯尔经（需提前预订）' }, time: '~15:30 – 17:00', duration: '~1.5h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Trinity+College+Book+of+Kells+Dublin' },
+      { type: 'activity', icon: '🍽️', title: { en: 'Dinner at Brother Hubbard South', zh: '晚餐：Brother Hubbard South' }, time: '~19:00', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Brother+Hubbard+South+Dublin' },
     ],
     activities: {
-      en: [
-        'Option A: Phoenix Park + Farmleigh (green / garden day)',
-        'Option B: Howth + seafood (if weather is good)',
-        'Explore at a relaxed pace',
-      ],
-      zh: [
-        '方案A: 凤凰公园 + Farmleigh（绿地花园日）',
-        '方案B: Howth + 海鲜（天气好的话）',
-        '轻松节奏游览',
-      ]
+      en: ['Dublin historic core walking day', 'Book of Kells requires advance booking!'],
+      zh: ['都柏林历史核心区步行日', '凯尔经需提前预订！']
     },
     hotel: { name: 'Clayton Hotel Charlemont Dublin City', addr: '2 Charlemont Street, Dublin', rooms: 2, checkin: '–', checkout: '11:00', note: { en: '2nd night', zh: '第二晚' }, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Clayton+Hotel+Charlemont+Dublin+City' },
     pdfs: ['20260409-11 - hotel - Clayton Dublin.pdf'],
@@ -539,53 +540,63 @@ const days = [
       { type: 'activity', icon: '🏰', title: { en: 'Rock of Cashel', zh: '凯舍尔岩' }, time: '~11:30 – 12:30', duration: '~1h visit', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Rock+of+Cashel+Ireland' },
       { type: 'activity', icon: '🍽️', title: { en: 'Lunch at Mikey Ryan\'s Bar & Kitchen, Cashel (locally sourced)', zh: '午餐：Mikey Ryan\'s Bar & Kitchen, Cashel（本地食材）' }, time: '~12:30 – 13:10', duration: 'next to Rock of Cashel', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Mikey+Ryans+Bar+Kitchen+Cashel' },
       { type: 'activity', icon: '☕', title: { en: 'Bakehouse 22 — bakery on Cashel main street', zh: '咖啡甜点：Bakehouse 22 — Cashel主街面包店' }, time: '~13:10 – 13:20', duration: 'quick stop', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Bakehouse+22+Cashel' },
-      { type: 'drive', icon: '🚗', title: { en: 'Rock of Cashel → Cork', zh: '凯舍尔岩 → 科克' }, time: '~13:15 – 14:30', duration: '1h 15m · 100 km' },
+      { type: 'drive', icon: '🚗', title: { en: 'Rock of Cashel → Cork', zh: '凯舍尔岩 → 科克' }, time: '~13:30 – 14:45', duration: '1h 15m · 100 km' },
+      { type: 'activity', icon: '🏨', title: { en: 'Check in at Moxy Cork', zh: '入住Moxy Cork' }, time: '~15:00', duration: '' },
+      { type: 'activity', icon: '⛪', title: { en: 'St Fin Barre\'s Cathedral — architectural viewing', zh: '圣芬巴尔大教堂 — 建筑参观' }, time: '~16:00 – 17:00', duration: '~1h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=St+Fin+Barres+Cathedral+Cork' },
+      { type: 'activity', icon: '🍽️', title: { en: 'Dinner at Market Lane, Cork', zh: '晚餐：Market Lane, Cork' }, time: '~18:30', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Market+Lane+Cork' },
     ],
     activities: {
-      en: ['Main transfer day south through Ireland', 'Rock of Cashel — medieval fortress on the hilltop'],
-      zh: ['爱尔兰南下主要行驶日', '凯舍尔岩 — 山顶中世纪堡垒']
+      en: ['Transfer day south through Ireland', 'Rock of Cashel guided tour', 'St Fin Barre\'s Cathedral in the afternoon'],
+      zh: ['爱尔兰南下行驶日', '凯舍尔岩导览', '下午参观圣芬巴尔大教堂']
     },
     hotel: { name: 'Moxy Cork', addr: 'Camden Place, Cork, T23 C2RR', rooms: 2, checkin: '15:00', checkout: '11:00', note: { en: 'Prepaid — non-refundable (€554)', zh: '已预付 — 不可退款（€554）' }, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Moxy+Cork+Camden+Place' },
     pdfs: ['20260411-13 - hotel - Moxy Cork.pdf'],
   },
   {
     date: '2026-04-12', weekday: 'sun',
-    title: { en: 'Cork — Easy City Day', zh: '科克 — 轻松城市日' },
-    location: { en: 'Cork', zh: '科克' },
+    title: { en: 'Cork — Blarney Castle & City', zh: '科克 — 布拉尼城堡 & 市区' },
+    location: { en: 'Blarney / Cork', zh: '布拉尼 / 科克' },
     travelers: 'travelers_5',
     weatherKey: 'cork',
     segments: [
-      { type: 'activity', icon: '🥐', title: { en: 'Breakfast at Good Day Deli, Nano Nagle Place (sustainable café)', zh: '早餐：Good Day Deli, Nano Nagle Place（可持续咖啡馆）' }, time: '~08:30 – 09:15', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Good+Day+Deli+Nano+Nagle+Place+Cork' },
-      { type: 'activity', icon: '🍽️', title: { en: 'Lunch at Farmgate Café — mezzanine of English Market (seafood)', zh: '午餐：Farmgate Café — 英国市场二层（海鲜）' }, time: '~12:30 – 13:30', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Farmgate+Cafe+English+Market+Cork' },
-      { type: 'activity', icon: '☕', title: { en: 'The Bookshelf Coffee House — speciality coffee & bakes', zh: '咖啡甜点：The Bookshelf Coffee House' }, time: '~15:00 – 15:30', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=The+Bookshelf+Coffee+House+Cork' },
+      { type: 'activity', icon: '🥐', title: { en: 'Breakfast at Good Day Deli, Nano Nagle Place', zh: '早餐：Good Day Deli, Nano Nagle Place' }, time: '~08:30 – 09:15', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Good+Day+Deli+Nano+Nagle+Place+Cork' },
+      { type: 'drive', icon: '🚗', title: { en: 'Cork → Blarney Castle', zh: '科克 → 布拉尼城堡' }, time: '~09:30 – 09:45', duration: '15 min · 10 km' },
+      { type: 'activity', icon: '🏰', title: { en: 'Blarney Castle & Gardens (Rock Close, Poison Garden — kid-friendly grounds)', zh: '布拉尼城堡 & 花园（Rock Close、毒药花园 — 适合孩子）' }, time: '~09:45 – 13:00', duration: '~3h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Blarney+Castle+Cork' },
+      { type: 'activity', icon: '🍽️', title: { en: 'Lunch at Blarney Castle Hotel or village café', zh: '午餐：布拉尼城堡酒店或村中咖啡馆' }, time: '~13:00 – 14:00', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Blarney+Castle+Hotel' },
+      { type: 'drive', icon: '🚗', title: { en: 'Blarney → Cork City', zh: '布拉尼 → 科克市区' }, time: '~14:00 – 14:15', duration: '15 min' },
+      { type: 'activity', icon: '🏛️', title: { en: 'Cork City Gaol — audio tour & historical exhibits', zh: '科克城市监狱 — 语音导览 & 历史展览' }, time: '~14:30 – 16:30', duration: '~2h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Cork+City+Gaol' },
+      { type: 'activity', icon: '🌳', title: { en: 'Fitzgerald Park — playground for kids', zh: 'Fitzgerald Park — 儿童游乐场' }, time: '~16:30 – 17:30', duration: '~1h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Fitzgerald+Park+Cork' },
+      { type: 'activity', icon: '🍽️', title: { en: 'Dinner at Scoozi, Cork centre', zh: '晚餐：Scoozi, 科克市中心' }, time: '~19:00', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Scoozi+Cork' },
     ],
     activities: {
-      en: ['Cork Victorian Quarter', 'English Market — local food and crafts', 'Seafood lunch', 'Easy walking — no big drives today'],
-      zh: ['科克维多利亚区', '英国市场 — 当地美食和工艺品', '海鲜午餐', '轻松步行 — 今天不长途驾驶']
+      en: ['Blarney Castle: focus on gardens & grounds (kid-friendly)', 'Cork City Gaol: atmospheric audio tour', 'Fitzgerald Park has playground for energy burn'],
+      zh: ['布拉尼城堡：重点游览花园和庭院（适合孩子）', '科克城市监狱：沉浸式语音导览', 'Fitzgerald Park有儿童游乐场']
     },
     hotel: { name: 'Moxy Cork', addr: 'Camden Place, Cork, T23 C2RR', rooms: 2, checkin: '–', checkout: '11:00', note: { en: '2nd night', zh: '第二晚' }, mapUrl: 'https://www.google.com/maps/search/?api=1&query=Moxy+Cork+Camden+Place' },
     pdfs: ['20260411-13 - hotel - Moxy Cork.pdf'],
   },
   {
     date: '2026-04-13', weekday: 'mon',
-    title: { en: 'Fota / Cobh → Cork Airport → London', zh: 'Fota / 科芙 → 科克机场 → 伦敦' },
-    location: { en: 'Cork / Cobh', zh: '科克 / 科芙' },
+    title: { en: 'English Market → Camden Fort → Cobh → London', zh: '英国市场 → Camden堡垒 → 科芙 → 伦敦' },
+    location: { en: 'Cork / Crosshaven / Cobh', zh: '科克 / Crosshaven / 科芙' },
     travelers: 'travelers_5',
     weatherKey: 'cork',
     segments: [
       { type: 'activity', icon: '🥐', title: { en: 'Breakfast near Moxy Cork (TBD, before checkout)', zh: '早餐：Moxy Cork附近（待定，退房前）' }, time: '~08:30 – 09:00', duration: '' },
-      { type: 'drive', icon: '🚗', title: { en: 'Cork → Fota House & Gardens', zh: '科克 → Fota庄园及花园' }, time: '~10:00 – 10:25', duration: '25 min · 20 km' },
-      { type: 'activity', icon: '🏛️', title: { en: 'Fota House and Gardens', zh: 'Fota庄园及花园' }, time: '~10:30 – 12:00', duration: '~1.5h visit', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Fota+House+and+Gardens+Cork' },
-      { type: 'drive', icon: '🚗', title: { en: 'Fota → Cobh', zh: 'Fota → 科芙' }, time: '~12:00 – 12:15', duration: '15 min · 8 km' },
-      { type: 'activity', icon: '⛵', title: { en: 'Cobh — colourful harbour town', zh: '科芙 — 多彩海港小镇' }, time: '~12:15 – 13:00', duration: 'explore streets', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Cobh+Ireland' },
-      { type: 'activity', icon: '🍽️', title: { en: 'Lunch at Seasalt Cobh (coastal café)', zh: '午餐：Seasalt Cobh（海边咖啡馆）' }, time: '~13:00 – 13:45', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Seasalt+Cobh' },
-      { type: 'activity', icon: '☕', title: { en: 'Truly Scrumptious — traditional tea room near harbour', zh: '咖啡甜点：Truly Scrumptious — 港口旁传统茶室' }, time: '~14:00 – 14:30', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Truly+Scrumptious+Cobh' },
-      { type: 'drive', icon: '🚗', title: { en: 'Cobh → Cork Airport (return car)', zh: '科芙 → 科克机场（还车）' }, time: '~15:30 – 15:55', duration: '25 min · 25 km' },
+      { type: 'activity', icon: '🏪', title: { en: 'The English Market — mezzanine viewing & regional produce', zh: '英国市场 — 俯瞰 & 当地特产' }, time: '~09:30 – 11:00', duration: '~1.5h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=English+Market+Cork' },
+      { type: 'drive', icon: '🚗', title: { en: 'Cork → Camden Fort Meagher, Crosshaven', zh: '科克 → Camden Fort Meagher, Crosshaven' }, time: '~11:00 – 11:30', duration: '30 min' },
+      { type: 'activity', icon: '🏰', title: { en: 'Camden Fort Meagher — coastal defence fort (check Monday opening hours!)', zh: 'Camden Fort Meagher — 海岸防御堡垒（请确认周一开放时间！）' }, time: '~11:30 – 13:30', duration: '~2h', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Camden+Fort+Meagher+Crosshaven' },
+      { type: 'drive', icon: '🚗', title: { en: 'Crosshaven → Cobh', zh: 'Crosshaven → 科芙' }, time: '~13:30 – 14:00', duration: '30 min' },
+      { type: 'activity', icon: '⛵', title: { en: 'Cobh — St Colman\'s Cathedral & Deck of Cards houses', zh: '科芙 — 圣科尔曼大教堂 & "扑克牌"彩色房子' }, time: '~14:00 – 14:30', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=St+Colmans+Cathedral+Cobh' },
+      { type: 'activity', icon: '🍽️', title: { en: 'Late lunch at Seasalt Cobh', zh: '晚午餐：Seasalt Cobh' }, time: '~14:30 – 15:15', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Seasalt+Cobh' },
+      { type: 'activity', icon: '☕', title: { en: 'Truly Scrumptious — tea room near harbour', zh: '咖啡甜点：Truly Scrumptious — 港口旁茶室' }, time: '~15:15 – 15:45', duration: '', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Truly+Scrumptious+Cobh' },
+      { type: 'drive', icon: '🚗', title: { en: 'Cobh → Cork Airport (return car)', zh: '科芙 → 科克机场（还车）' }, time: '~16:00 – 16:25', duration: '25 min' },
+      { type: 'activity', icon: '🔑', title: { en: 'Return hire car & check in', zh: '还车 & 办理登机' }, time: '~16:30 – 18:00', duration: '' },
       { type: 'flight', icon: '✈️', title: { en: 'BA5924 (Aer Lingus): Cork → London Heathrow', zh: 'BA5924（爱尔兰航空）: 科克 → 伦敦希思罗' }, time: '20:30 – 21:45', duration: '1h 15m' },
     ],
     activities: {
-      en: ['Final sightseeing before heading home', 'Return hire car at Cork Airport'],
-      zh: ['回家前最后观光', '科克机场还车']
+      en: ['English Market morning — Cork\'s food heritage', 'Camden Fort Meagher — verify Monday opening before travel!', 'Cobh — Deck of Cards houses + St Colman\'s Cathedral', 'Return hire car at Cork Airport'],
+      zh: ['英国市场上午游览 — 科克美食文化', 'Camden Fort Meagher — 出发前确认周一开放时间！', '科芙 — 扑克牌彩色房子 + 圣科尔曼大教堂', '科克机场还车']
     },
     hotel: null,
     pdfs: ['20260413 - travel - BA5924.pdf'],
