@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ireland Family Trip — April 2026</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 :root {
   --green: #1a7a4c;
@@ -300,6 +302,24 @@ main { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem; }
   color: var(--green-dark);
 }
 
+/* Map */
+.day-map { height: 300px; border-radius: 8px; z-index: 1; }
+.numbered-marker-wrapper { background: none !important; border: none !important; }
+.numbered-marker {
+  background: var(--green);
+  color: white;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
 @media (max-width: 600px) {
   header h1 { font-size: 1.4rem; }
   .day-nav button { padding: 10px 14px; font-size: 0.8rem; }
@@ -348,6 +368,7 @@ const translations = {
     weather_unavailable: 'Weather forecast not yet available for this date',
     group_sijia: 'S',
     group_family: 'Rest of family',
+    route_map: 'Route Map',
     no_pdf: 'No PDF on file',
     mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday',
     fri: 'Friday', sat: 'Saturday', sun: 'Sunday',
@@ -372,6 +393,7 @@ const translations = {
     weather_unavailable: '该日期天气预报暂不可用',
     group_sijia: 'S',
     group_family: '其余家人',
+    route_map: '今日路线地图',
     no_pdf: '暂无PDF文件',
     mon: '周一', tue: '周二', wed: '周三', thu: '周四',
     fri: '周五', sat: '周六', sun: '周日',
@@ -704,6 +726,7 @@ function renderDays() {
   main.innerHTML = days.map((d, i) => `
     <div class="day-section ${i === activeDay ? 'active' : ''}" id="day-${i}">
       ${renderDayHeader(d)}
+      ${renderMap(i)}
       ${d.isSplitDay ? renderSplitItinerary(d) : renderItinerary(d)}
       ${renderActivities(d)}
       ${d.hotel ? renderHotel(d.hotel) : ''}
@@ -711,6 +734,7 @@ function renderDays() {
       ${renderDocs(d)}
     </div>
   `).join('');
+  setTimeout(() => initMapForDay(activeDay), 50);
 }
 
 function renderDayHeader(d) {
@@ -892,6 +916,124 @@ function renderDocs(d) {
       <h3>📄 ${t('documents')}</h3>
       <div class="doc-list">${d.pdfs.map(p => `<span class="doc-tag">${p}</span>`).join('')}</div>
     </div>`;
+}
+
+// ── Map locations per day ──
+const dayLocations = [
+  // Day 1 — Mon Belfast
+  [
+    { lat: 54.6181, lon: -5.8725, en: 'Belfast City Airport', zh: '贝尔法斯特城市机场' },
+    { lat: 54.5892, lon: -5.9280, en: 'voco Belfast', zh: 'voco 贝尔法斯特' },
+    { lat: 54.5837, lon: -5.9310, en: 'Botanic Gardens', zh: '植物园' },
+    { lat: 54.5845, lon: -5.9345, en: "Queen's University", zh: '女王大学' },
+    { lat: 54.5983, lon: -5.9358, en: 'Home Restaurant', zh: 'Home Restaurant 晚餐' },
+  ],
+  // Day 2 — Tue Belfast→Derry
+  [
+    { lat: 54.5892, lon: -5.9280, en: 'voco Belfast (depart)', zh: 'voco 贝尔法斯特（出发）' },
+    { lat: 54.9970, lon: -7.3190, en: 'Holiday Inn Express Derry', zh: '德里Holiday Inn Express' },
+    { lat: 54.9960, lon: -7.3220, en: 'Derry City Walls', zh: '德里城墙' },
+    { lat: 54.9955, lon: -7.3200, en: 'Spaghetti Junction (lunch)', zh: 'Spaghetti Junction（午餐）' },
+    { lat: 54.9975, lon: -7.3170, en: 'Legenderry Warehouse No. 1', zh: 'Legenderry Warehouse No. 1' },
+    { lat: 54.9990, lon: -7.3195, en: 'The Exchange (dinner)', zh: 'The Exchange（晚餐）' },
+  ],
+  // Day 3 — Wed North Coast→Belfast
+  [
+    { lat: 54.9970, lon: -7.3190, en: 'Holiday Inn Express Derry', zh: '德里Holiday Inn Express' },
+    { lat: 55.2408, lon: -6.5116, en: "Giant's Causeway", zh: '巨人堤道' },
+    { lat: 55.2396, lon: -6.3319, en: 'Carrick-a-Rede', zh: '卡里克空中索桥' },
+    { lat: 55.2047, lon: -6.2427, en: 'Ballycastle (lunch)', zh: 'Ballycastle（午餐）' },
+    { lat: 55.1349, lon: -6.2059, en: 'Dark Hedges', zh: '黑暗树篱' },
+    { lat: 54.5955, lon: -5.9365, en: 'Leonardo Hotel Belfast', zh: 'Leonardo酒店' },
+    { lat: 54.5964, lon: -5.9300, en: 'Belfast City Hall', zh: '贝尔法斯特市政厅' },
+  ],
+  // Day 4 — Thu Belfast split
+  [
+    { lat: 54.5850, lon: -5.9310, en: 'Maggie Mays (breakfast)', zh: 'Maggie Mays（早餐）' },
+    { lat: 54.6000, lon: -5.9190, en: 'The Big Fish', zh: '大鱼雕塑' },
+    { lat: 54.6080, lon: -5.9100, en: 'Titanic Belfast', zh: '泰坦尼克号博物馆' },
+    { lat: 54.6020, lon: -5.9270, en: 'Cathedral Quarter', zh: '大教堂区' },
+    { lat: 54.5955, lon: -5.9365, en: 'Fratelli (lunch)', zh: 'Fratelli（午餐）' },
+    { lat: 54.6181, lon: -5.8725, en: 'Belfast City Airport (S)', zh: '贝尔法斯特机场（S）' },
+    { lat: 54.5950, lon: -5.9450, en: 'Grand Central Station', zh: '中央车站' },
+    { lat: 53.3520, lon: -6.2500, en: 'Dublin Connolly', zh: '都柏林康诺利站' },
+    { lat: 53.3330, lon: -6.2590, en: 'Clayton Hotel Dublin', zh: 'Clayton酒店' },
+    { lat: 53.3210, lon: -6.2600, en: 'Sano Pizza (dinner)', zh: 'Sano Pizza（晚餐）' },
+  ],
+  // Day 5 — Fri Dublin
+  [
+    { lat: 53.3330, lon: -6.2650, en: 'Alma Café (breakfast)', zh: 'Alma Café（早餐）' },
+    { lat: 53.3429, lon: -6.2674, en: 'Dublin Castle', zh: '都柏林城堡' },
+    { lat: 53.3425, lon: -6.2678, en: 'Chester Beatty Library', zh: 'Chester Beatty图书馆' },
+    { lat: 53.3435, lon: -6.2720, en: 'Queen of Tarts (lunch)', zh: 'Queen of Tarts（午餐）' },
+    { lat: 53.3465, lon: -6.2634, en: "Ha'penny Bridge", zh: '半便士桥' },
+    { lat: 53.3439, lon: -6.2546, en: 'Trinity College / Book of Kells', zh: '三一学院 / 凯尔经' },
+    { lat: 53.3390, lon: -6.2640, en: 'Brother Hubbard South (dinner)', zh: 'Brother Hubbard South（晚餐）' },
+  ],
+  // Day 6 — Sat Dublin→Cashel→Cork
+  [
+    { lat: 53.3330, lon: -6.2590, en: 'Clayton Hotel Dublin', zh: 'Clayton酒店' },
+    { lat: 52.5201, lon: -7.8908, en: 'Rock of Cashel', zh: '凯舍尔岩' },
+    { lat: 52.5195, lon: -7.8895, en: "Mikey Ryan's (lunch)", zh: "Mikey Ryan's（午餐）" },
+    { lat: 51.8975, lon: -8.4735, en: 'National Monument', zh: '国家纪念碑' },
+    { lat: 51.8943, lon: -8.4810, en: "St Fin Barre's Cathedral", zh: '圣芬巴尔大教堂' },
+    { lat: 51.8980, lon: -8.4740, en: 'Market Lane (dinner)', zh: 'Market Lane（晚餐）' },
+    { lat: 51.8985, lon: -8.4756, en: 'Moxy Cork', zh: 'Moxy Cork' },
+  ],
+  // Day 7 — Sun Blarney/Cork
+  [
+    { lat: 51.8935, lon: -8.4785, en: 'Good Day Deli (breakfast)', zh: 'Good Day Deli（早餐）' },
+    { lat: 51.9290, lon: -8.5710, en: 'Blarney Castle', zh: '布拉尼城堡' },
+    { lat: 51.8990, lon: -8.4920, en: 'Cork City Gaol', zh: '科克城市监狱' },
+    { lat: 51.8950, lon: -8.4930, en: 'Fitzgerald Park', zh: 'Fitzgerald Park' },
+    { lat: 51.8975, lon: -8.4730, en: 'Scoozi (dinner)', zh: 'Scoozi（晚餐）' },
+  ],
+  // Day 8 — Mon Cork→Cobh→London
+  [
+    { lat: 51.8975, lon: -8.4735, en: 'English Market', zh: '英国市场' },
+    { lat: 51.8100, lon: -8.3050, en: 'Camden Fort Meagher', zh: 'Camden Fort Meagher' },
+    { lat: 51.8510, lon: -8.2945, en: "St Colman's Cathedral", zh: '圣科尔曼大教堂' },
+    { lat: 51.8500, lon: -8.2960, en: 'Deck of Cards houses', zh: '"扑克牌"彩色房子' },
+    { lat: 51.8505, lon: -8.2950, en: 'Seasalt Cobh (lunch)', zh: 'Seasalt Cobh（午餐）' },
+    { lat: 51.8413, lon: -8.4911, en: 'Cork Airport', zh: '科克机场' },
+  ],
+];
+
+function renderMap(dayIndex) {
+  const locs = dayLocations[dayIndex];
+  if (!locs || locs.length === 0) return '';
+  return `<div class="card"><h3>🗺️ ${t('route_map')}</h3><div id="map-${dayIndex}" class="day-map"></div></div>`;
+}
+
+let currentMap = null;
+function initMapForDay(dayIndex) {
+  const locs = dayLocations[dayIndex];
+  if (!locs || locs.length === 0) return;
+  const el = document.getElementById(`map-${dayIndex}`);
+  if (!el) return;
+  if (currentMap) { currentMap.remove(); currentMap = null; }
+  const map = L.map(el, { scrollWheelZoom: false });
+  currentMap = map;
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap',
+    maxZoom: 18,
+  }).addTo(map);
+  const markers = locs.map((loc, i) => {
+    const icon = L.divIcon({
+      className: 'numbered-marker-wrapper',
+      html: `<div class="numbered-marker">${i + 1}</div>`,
+      iconSize: [26, 26],
+      iconAnchor: [13, 13],
+    });
+    const label = loc[currentLang] || loc.en;
+    return L.marker([loc.lat, loc.lon], { icon })
+      .addTo(map)
+      .bindPopup(`<b>${i + 1}. ${label}</b>`);
+  });
+  const latlngs = locs.map(l => [l.lat, l.lon]);
+  L.polyline(latlngs, { color: '#1a7a4c', weight: 2, dashArray: '6,8', opacity: 0.5 }).addTo(map);
+  const group = L.featureGroup(markers);
+  map.fitBounds(group.getBounds().pad(0.15));
 }
 
 // ── Init ──
